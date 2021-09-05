@@ -14,9 +14,9 @@ commands:
     usage: /pplonline
     permission:
       default: true
-  race:
+  startrace:
     description: Starts the biome race.
-    usage: /race
+    usage: /startrace
     permission:
       default: op
   racestatus:
@@ -24,3 +24,8 @@ commands:
     usage: /racestatus
     permission:
       default: true
+  stoprace:
+    description: Stops the current race.
+    usage: /stoprace
+    permission:
+      default: op

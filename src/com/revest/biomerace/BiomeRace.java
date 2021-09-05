@@ -13,7 +13,7 @@ public class BiomeRace extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BiomeRaceEvents(), this);
         getCommand("biome").setExecutor(commands);
         getCommand("pplonline").setExecutor(commands);
-        getCommand("race").setExecutor(commands);
+        getCommand("startrace").setExecutor(commands);
         getCommand("racestatus").setExecutor(commands);
         getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[BiomeRace]: Plugin is enabled!");
     }

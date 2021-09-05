@@ -1,26 +1,26 @@
 package com.revest.biomerace.commands;
 
-import org.bukkit.Bukkit;
+import com.revest.biomerace.BiomeRace;
+import com.revest.biomerace.checks.BiomeRaceCheck;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
-import com.revest.biomerace.BiomeRace;
-import com.revest.biomerace.checks.BiomeRaceCheck;
-
-import static org.bukkit.Bukkit.*;
+import static org.bukkit.Bukkit.getServer;
 
 
 public class BiomeRaceCommands implements CommandExecutor {
     private final BiomeRace plugin;
     private String randombiome = "";
+    private BukkitTask task;
 
     public BiomeRaceCommands(BiomeRace plugin) {
         getServer().getConsoleSender().sendMessage("Creating BiomeRace Commands Instance");
@@ -33,7 +33,7 @@ public class BiomeRaceCommands implements CommandExecutor {
             return true;
         }
         Player Sender = (Player) sender;
-        String[] biomes = {"jungle", "desert", "plains", "basalt_deltas", "savanna", "swamp", "tagia",
+        String[] biomes = {"jungle", "desert", "plains", "basalt_deltas", "savanna", "swamp", "taiga",
                 "mountains", "forest", "warped_forest", "crimson_forest", "nether_wastes"};
 
         if (cmd.getName().equalsIgnoreCase("biome")) {
@@ -51,16 +51,20 @@ public class BiomeRaceCommands implements CommandExecutor {
             Sender.sendMessage(ChatColor.AQUA + "Players online: " + playersonlinestring);
         }
 
-        if (cmd.getName().equalsIgnoreCase("race")) {
-            boolean p1inbiome = false;
+        if (cmd.getName().equalsIgnoreCase("startrace")) {
             int randomidx = new Random().nextInt(biomes.length);
             randombiome = biomes[randomidx];
-            List<String> playersonline = new ArrayList<>();
             for (Player player : getServer().getOnlinePlayers()) {
-                String playername = player.getName();
-                playersonline.add(playername);
-                player.sendTitle(ChatColor.AQUA + "Find a " + randombiome + " biome!", ChatColor.DARK_AQUA + "Find the biome before your opponent!", 10, 100, 20); }
-            BukkitTask task = new BiomeRaceCheck(Sender, randombiome, playersonline).runTaskTimer(this.plugin, 0, 100);
+                player.sendTitle(ChatColor.AQUA + "Find a " + randombiome + " biome!", ChatColor.DARK_AQUA + "Find the biome before your opponent!", 10, 100, 20);
+            }
+            task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, 100);
+        }
+
+        if (cmd.getName().equalsIgnoreCase("stoprace")) {
+            task.cancel();
+            for (Player player : getServer().getOnlinePlayers()) {
+                player.sendTitle(ChatColor.AQUA + "The race has been cancelled.", ChatColor.DARK_AQUA + "", 10, 100, 20);
+            }
         }
 
         if (cmd.getName().equalsIgnoreCase("racestatus")) {
