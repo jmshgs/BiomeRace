@@ -2,12 +2,15 @@ package com.revest.biomerace.commands;
 
 import com.revest.biomerace.BiomeRace;
 import com.revest.biomerace.checks.BiomeRaceCheck;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +22,7 @@ import static org.bukkit.Bukkit.getServer;
 
 public class BiomeRaceCommands implements CommandExecutor {
     private final BiomeRace plugin;
-    private String randombiome = "";
+    public static String randombiome = "";
     private BukkitTask task;
 
     public BiomeRaceCommands(BiomeRace plugin) {
@@ -56,6 +59,7 @@ public class BiomeRaceCommands implements CommandExecutor {
             randombiome = biomes[randomidx];
             for (Player player : getServer().getOnlinePlayers()) {
                 player.sendTitle(ChatColor.AQUA + "Find a " + randombiome + " biome!", ChatColor.DARK_AQUA + "Find the biome before your opponent!", 10, 100, 20);
+
             }
             task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, 100);
         }
@@ -64,11 +68,18 @@ public class BiomeRaceCommands implements CommandExecutor {
             task.cancel();
             for (Player player : getServer().getOnlinePlayers()) {
                 player.sendTitle(ChatColor.AQUA + "The race has been cancelled.", ChatColor.DARK_AQUA + "", 10, 100, 20);
+                randombiome = "";
             }
         }
 
         if (cmd.getName().equalsIgnoreCase("racestatus")) {
             Sender.sendMessage(ChatColor.AQUA + "Looking for a " + randombiome + " biome currently.");
+        }
+        if (cmd.getName().equalsIgnoreCase("ab")) {
+            Sender.sendMessage(ChatColor.AQUA + "Action Bar Test");
+            for (Player player : getServer().getOnlinePlayers()) {
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§3"+randombiome));
+            }
         }
          return true;
     }
