@@ -39,13 +39,8 @@ public class BiomeRace extends JavaPlugin {
                 for (Player player : getServer().getOnlinePlayers()) {
                     String currentbiome = player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT);
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§3"+BiomeRaceCommands.randombiome));
-
                 }
 
-
-                // Do something
-                // old Way that sends thru chat getServer().dispatchCommand(getServer().getConsoleSender(), "title @a actionbar {\"text\":\""+ getServer().getMotd() +"\",\"color\":\"dark_blue\"}");
-                //player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("Hello, world!"));
             }
         }, 0L, 20L);
     }
