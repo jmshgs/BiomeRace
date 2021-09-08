@@ -22,9 +22,9 @@ public class actionbar extends BukkitRunnable {
         for (Player player : Bukkit.getOnlinePlayers()) {
             String currentbiome = player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT);
             if (!player.isSneaking()) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§3" + randombiome));
-            } else {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§2 Current Biome: " + currentbiome));
+            } else {
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§3 Looking For: " + randombiome));
             }
             if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) {
                 // Stop loop if player found the biome.

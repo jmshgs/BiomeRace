@@ -29,8 +29,8 @@ commands:
     usage: /stoprace
     permission:
       default: op
-  ab:
-    description: Action Bar Testing
-    usage: /ab
+  actionbarupdatedelay:
+    description: Action Bar Update Delay.
+    usage: /actionbarupdatedelay {Amount of Ticks}
     permission:
       default: op

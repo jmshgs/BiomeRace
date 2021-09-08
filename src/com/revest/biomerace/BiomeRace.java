@@ -19,8 +19,9 @@ public class BiomeRace extends JavaPlugin {
         getCommand("startrace").setExecutor(commands);
         getCommand("stoprace").setExecutor(commands);
         getCommand("racestatus").setExecutor(commands);
-        getCommand("ab").setExecutor(commands);
+        getCommand("actionbarupdatedelay").setExecutor(commands);
         getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[BiomeRace]: Plugin is enabled!");
+        //this.saveDefaultConfig();
 
     }
 

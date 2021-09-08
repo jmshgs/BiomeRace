@@ -3,6 +3,7 @@ package com.revest.biomerace.commands;
 import com.revest.biomerace.BiomeRace;
 import com.revest.biomerace.actionbar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
+import com.revest.biomerace.config.config;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
@@ -77,11 +78,16 @@ public class BiomeRaceCommands implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("racestatus")) {
             Sender.sendMessage(ChatColor.AQUA + "Looking for a " + randombiome + " biome currently.");
         }
-        if (cmd.getName().equalsIgnoreCase("ab")) {
-            Sender.sendMessage(ChatColor.AQUA + "Action Bar Test");
-            for (Player player : getServer().getOnlinePlayers()) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§3"+randombiome));
+
+        if (cmd.getName().equalsIgnoreCase("actionbarupdatedelay")) {
+            if (strings.length > 0 && !strings[0].startsWith("0")) {
+                if (config.isStringInt(strings[0])) {
+                    //Set to Config.
+                    Sender.sendMessage(ChatColor.AQUA + "okay " + strings[0]);
+                }
             }
+
+            Sender.sendMessage(ChatColor.AQUA + "Action");
         }
          return true;
     }
