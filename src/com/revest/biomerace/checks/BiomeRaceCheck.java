@@ -22,7 +22,7 @@ public class BiomeRaceCheck extends BukkitRunnable {
 
     @Override
     public void run() {
-        Bukkit.getConsoleSender().sendMessage("Checking location of players!");
+        // LESS LAG Bukkit.getConsoleSender().sendMessage("Checking location of players!");
         for (Player player : getServer().getOnlinePlayers()) {
             // Check if this player is in biome
             if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) {

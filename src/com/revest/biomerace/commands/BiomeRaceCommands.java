@@ -1,6 +1,7 @@
 package com.revest.biomerace.commands;
 
 import com.revest.biomerace.BiomeRace;
+import com.revest.biomerace.actionbar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -62,6 +63,7 @@ public class BiomeRaceCommands implements CommandExecutor {
 
             }
             task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, 100);
+            task = new actionbar(randombiome).runTaskTimer(this.plugin, 0, 5);
         }
 
         if (cmd.getName().equalsIgnoreCase("stoprace")) {
