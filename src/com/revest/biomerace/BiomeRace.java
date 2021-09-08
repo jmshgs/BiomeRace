@@ -4,7 +4,6 @@ import com.revest.biomerace.events.BiomeRaceEvents;
 import com.revest.biomerace.commands.BiomeRaceCommands;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
 
 
 public class BiomeRace extends JavaPlugin {
@@ -29,5 +28,4 @@ public class BiomeRace extends JavaPlugin {
     public void onDisable() {
         getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[BiomeRace]: Plugin is disabled.");
     }
-    
 }
