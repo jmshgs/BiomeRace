@@ -1,18 +1,14 @@
 package com.revest.biomerace.commands;
 
 import com.revest.biomerace.BiomeRace;
-import com.revest.biomerace.actionbar;
+import com.revest.biomerace.BiomeRaceActionBar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
-import com.revest.biomerace.config.config;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +21,9 @@ import static org.bukkit.Bukkit.getServer;
 public class BiomeRaceCommands implements CommandExecutor {
     private final BiomeRace plugin;
     public static String randombiome = "";
+    public String tickdelay;
     private BukkitTask task;
+
 
     public BiomeRaceCommands(BiomeRace plugin) {
         getServer().getConsoleSender().sendMessage("Creating BiomeRace Commands Instance");
@@ -33,7 +31,7 @@ public class BiomeRaceCommands implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String s, String[] strings) {
+    public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         if (!(sender instanceof Player)) {
             return true;
         }
@@ -63,8 +61,8 @@ public class BiomeRaceCommands implements CommandExecutor {
                 player.sendTitle(ChatColor.AQUA + "Find a " + randombiome + " biome!", ChatColor.DARK_AQUA + "Find the biome before your opponent!", 10, 100, 20);
 
             }
-            task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, 100);
-            task = new actionbar(randombiome).runTaskTimer(this.plugin, 0, 5);
+            task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, Long.parseLong(tickdelay));
+            task = new BiomeRaceActionBar(randombiome).runTaskTimer(this.plugin, 0, Long.parseLong(tickdelay));
         }
 
         if (cmd.getName().equalsIgnoreCase("stoprace")) {
@@ -79,15 +77,11 @@ public class BiomeRaceCommands implements CommandExecutor {
             Sender.sendMessage(ChatColor.AQUA + "Looking for a " + randombiome + " biome currently.");
         }
 
-        if (cmd.getName().equalsIgnoreCase("actionbarupdatedelay")) {
-            if (strings.length > 0 && !strings[0].startsWith("0")) {
-                if (config.isStringInt(strings[0])) {
-                    //Set to Config.
-                    Sender.sendMessage(ChatColor.AQUA + "okay " + strings[0]);
-                }
+        if (cmd.getName().equalsIgnoreCase("updatedelay")) {
+            if (args.length > 0 && !args[0].startsWith("0")) {
+                tickdelay = s;
+                Sender.sendMessage(ChatColor.AQUA + "The tick delay has been set to " + tickdelay + "ticks. (A tick is a 20th of a second.)");
             }
-
-            Sender.sendMessage(ChatColor.AQUA + "Action");
         }
          return true;
     }

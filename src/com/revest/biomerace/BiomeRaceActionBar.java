@@ -9,11 +9,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Locale;
 
-public class actionbar extends BukkitRunnable {
+public class BiomeRaceActionBar extends BukkitRunnable {
     private final String randombiome;
 
 
-    public actionbar(String randombiome) {
+    public BiomeRaceActionBar(String randombiome) {
         this.randombiome = randombiome;
     }
 

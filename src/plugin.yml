@@ -29,8 +29,8 @@ commands:
     usage: /stoprace
     permission:
       default: op
-  actionbarupdatedelay:
-    description: Action Bar Update Delay.
-    usage: /actionbarupdatedelay {Amount of Ticks}
+ updatedelay:
+    description: Changes the tick update delay of the player's location.
+    usage: /updatedelay {Amount of ticks}
     permission:
       default: op
