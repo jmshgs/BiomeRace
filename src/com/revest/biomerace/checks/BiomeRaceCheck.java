@@ -28,7 +28,7 @@ public class BiomeRaceCheck extends BukkitRunnable {
             if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) {
                 // Player is in biome - message all players that the game is over
                 for (Player p : getServer().getOnlinePlayers()) {
-                    p.sendTitle(ChatColor.AQUA + player.getName() + "found the biome first!", ChatColor.DARK_AQUA + "ggs", 10, 100, 20);
+                    p.sendTitle(ChatColor.AQUA + player.getName() + " found the biome first!", ChatColor.DARK_AQUA + "ggs", 10, 100, 20);
                 }
                 // Stop loop
                 this.cancel();
