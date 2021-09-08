@@ -29,19 +29,5 @@ public class BiomeRace extends JavaPlugin {
     public void onDisable() {
         getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[BiomeRace]: Plugin is disabled.");
     }
-
-    //start
-
-    public void runnable() {
-        new BukkitRunnable(){
-
-            @Override
-            public void run() {
-                //run
-            }
-        }.runTaskTimerAsynchronously(this, 0, 5);
-    }
-
-
-    //end
+    
 }
