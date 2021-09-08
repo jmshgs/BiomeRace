@@ -20,13 +20,13 @@ public class BiomeRace extends JavaPlugin {
         getCommand("stoprace").setExecutor(commands);
         getCommand("racestatus").setExecutor(commands);
         getCommand("updatedelay").setExecutor(commands);
-        getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[BiomeRace]: Plugin is enabled!");
+        getServer().getConsoleSender().sendMessage("§b[BiomeRace]: Plugin is enabled!");
         //this.saveDefaultConfig();
 
     }
 
     @Override
     public void onDisable() {
-        getServer().getConsoleSender().sendMessage(ChatColor.AQUA + "[BiomeRace]: Plugin is disabled.");
+        getServer().getConsoleSender().sendMessage("§b[BiomeRace]: Plugin is disabled.");
     }
 }

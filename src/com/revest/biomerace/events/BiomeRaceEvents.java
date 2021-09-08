@@ -11,7 +11,7 @@ public class BiomeRaceEvents implements Listener {
     @EventHandler
     public static void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        player.sendMessage(ChatColor.AQUA + "Welcome! :D");
+        player.sendMessage("§bWelcome! :D");
     }
 
 }

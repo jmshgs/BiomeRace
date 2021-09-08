@@ -3,7 +3,6 @@ package com.revest.biomerace.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class BiomeRaceTabComplete implements TabCompleter {
                 ArrayList<String> values = new ArrayList<String>();
 
                 if (strings[0].equals("")) {
-                    
+
                 }
             }
         }

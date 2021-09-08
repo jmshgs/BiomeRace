@@ -38,10 +38,10 @@ public class BiomeRaceCommands implements CommandExecutor {
         Player Sender = (Player) sender;
         String[] biomes = {"jungle", "desert", "plains", "basalt_deltas", "savanna", "swamp", "taiga",
                 "mountains", "forest", "warped_forest", "crimson_forest", "nether_wastes"};
+        String currentbiome = Sender.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT);
 
         if (cmd.getName().equalsIgnoreCase("biome")) {
-            Sender.sendMessage(ChatColor.AQUA + "You are currently in a " + (ChatColor.AQUA + (Sender.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT)
-                    + "" + ChatColor.AQUA + " biome.")));
+            Sender.sendMessage("§bYou are currently in a " + currentbiome + "§b biome.");
         }
 
         if (cmd.getName().equalsIgnoreCase("pplonline")) {
@@ -58,7 +58,7 @@ public class BiomeRaceCommands implements CommandExecutor {
             int randomidx = new Random().nextInt(biomes.length);
             randombiome = biomes[randomidx];
             for (Player player : getServer().getOnlinePlayers()) {
-                player.sendTitle(ChatColor.AQUA + "Find a " + randombiome + " biome!", ChatColor.DARK_AQUA + "Find the biome before your opponent!", 10, 100, 20);
+                player.sendTitle("§bFind a " + randombiome + " biome!", ChatColor.DARK_AQUA + "§3Find the biome before your opponent!", 10, 100, 20);
 
             }
             task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, Long.parseLong(tickdelay));
@@ -68,19 +68,19 @@ public class BiomeRaceCommands implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("stoprace")) {
             task.cancel();
             for (Player player : getServer().getOnlinePlayers()) {
-                player.sendTitle(ChatColor.AQUA + "The race has been cancelled.", ChatColor.DARK_AQUA + "", 10, 100, 20);
+                player.sendTitle("§bThe race has been cancelled.", "§3", 10, 100, 20);
                 randombiome = "";
             }
         }
 
         if (cmd.getName().equalsIgnoreCase("racestatus")) {
-            Sender.sendMessage(ChatColor.AQUA + "Looking for a " + randombiome + " biome currently.");
+            Sender.sendMessage("§bLooking for a " + randombiome + " biome currently.");
         }
 
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {
             if (args.length > 0 && !args[0].startsWith("0")) {
                 tickdelay = s;
-                Sender.sendMessage(ChatColor.AQUA + "The tick delay has been set to " + tickdelay + "ticks. (A tick is a 20th of a second.)");
+                Sender.sendMessage("§bThe tick delay has been set to " + tickdelay + "ticks. (A tick is a 20th of a second.)");
             }
         }
          return true;
