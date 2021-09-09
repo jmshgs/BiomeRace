@@ -82,6 +82,7 @@ public class BiomeRaceCommands implements CommandExecutor {
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {
             if (args.length > 0) {
                 if (args[0].startsWith("ab")) {
+                    Sender.sendMessage(s);
                     actionbartickdelay = config.removefrontfromstring(s, 2);
                     Sender.sendMessage("§bThe tick delay for updating the action bar has been set to " + actionbartickdelay + "ticks. (A tick is a 20th of a second.)");
                 }
@@ -89,6 +90,9 @@ public class BiomeRaceCommands implements CommandExecutor {
                     if (args[0].startsWith("rc")) {
                         racechecktickdelay = config.removefrontfromstring(s, 2);
                         Sender.sendMessage("§bThe tick delay for checking Winner has been set to " + racechecktickdelay + "ticks. (A tick is a 20th of a second.)");
+                    }
+                    else {
+                        Sender.sendMessage("§4Sorry But you need so Specify What Type you want to Change.");
                     }
 
                 }
