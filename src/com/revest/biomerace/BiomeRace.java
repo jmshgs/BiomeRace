@@ -14,7 +14,7 @@ public class BiomeRace extends JavaPlugin {
     @Override
     public void onEnable() {
         BiomeRaceCommands commands = new BiomeRaceCommands(this);
-        BiomeRaceTabComplete tabComplete = new BiomeRaceTabComplete(this);
+        BiomeRaceTabComplete tabComplete = new BiomeRaceTabComplete();
         getServer().getPluginManager().registerEvents(new BiomeRaceEvents(), this);
         getCommand("biome").setExecutor(commands);
         getCommand("pplonline").setExecutor(commands);
