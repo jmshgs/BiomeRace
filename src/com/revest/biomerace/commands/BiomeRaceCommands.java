@@ -57,6 +57,7 @@ public class BiomeRaceCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("startrace")) {
+            randombiome = "";
             int randomidx = new Random().nextInt(biomes.length);
             randombiome = biomes[randomidx];
             for (Player player : getServer().getOnlinePlayers()) {
