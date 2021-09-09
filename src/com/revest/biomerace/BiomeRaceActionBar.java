@@ -11,10 +11,12 @@ import java.util.Locale;
 
 public class BiomeRaceActionBar extends BukkitRunnable {
     private final String randombiome;
+    private BiomeRace plugin;
 
 
-    public BiomeRaceActionBar(String randombiome) {
+    public BiomeRaceActionBar(String randombiome, BiomeRace plugin) {
         this.randombiome = randombiome;
+        this.plugin = plugin;
     }
 
     @Override
@@ -22,21 +24,16 @@ public class BiomeRaceActionBar extends BukkitRunnable {
         for (Player player : Bukkit.getOnlinePlayers()) {
             String currentbiome = player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT);
             if (!player.isSneaking()) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§3 Current Biome: " + currentbiome));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(String.format(plugin.getConfig().getString("messages.currentbiome"), currentbiome)));
             } else {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent("§5 Looking For: " + randombiome));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(String.format(plugin.getConfig().getString("messages.lookforbiome"), randombiome)));
             }
             if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) {
                 // Stop loop if player found the biome.
                 this.cancel();
             }
         }
-        if (randombiome == "") {
-            this.cancel();
-        }
+
     }
 
-
-
 }
-

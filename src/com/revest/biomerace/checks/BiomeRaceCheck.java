@@ -1,6 +1,5 @@
 package com.revest.biomerace.checks;
-
-import org.bukkit.ChatColor;
+import com.revest.biomerace.BiomeRace;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -10,12 +9,14 @@ import static org.bukkit.Bukkit.getServer;
 
 
 public class BiomeRaceCheck extends BukkitRunnable {
+    private BiomeRace plugin;
     private final String randombiome;
     private final Player Sender;
 
-    public BiomeRaceCheck(Player Sender, String randombiome) {
+    public BiomeRaceCheck(Player Sender, String randombiome, BiomeRace plugin) {
         this.Sender = Sender;
         this.randombiome = randombiome;
+        this.plugin = plugin;
 
     }
 
@@ -27,7 +28,7 @@ public class BiomeRaceCheck extends BukkitRunnable {
             if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) {
                 // Player is in biome - message all players that the game is over
                 for (Player p : getServer().getOnlinePlayers()) {
-                    p.sendTitle("§b"+ player.getName() + "found the biome first!", "§3ggs", 10, 100, 20);
+                    p.sendTitle(String.format(plugin.getConfig().getString("messages.firsttobiome"), player.getName()), plugin.getConfig().getString("messages.ggmsg"), 10, 100, 20);
                 }
                 // Stop loop
                 this.cancel();

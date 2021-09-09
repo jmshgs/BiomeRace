@@ -10,9 +10,11 @@ import static org.bukkit.Bukkit.getServer;
 import java.util.*;
 
 public class BiomeRaceTabComplete implements TabCompleter {
+    private final BiomeRace plugin;
 
-    public BiomeRaceTabComplete() {
-        getServer().getConsoleSender().sendMessage("Creating BiomeRace Tab Instance");
+    public BiomeRaceTabComplete(BiomeRace plugin) {
+        getServer().getConsoleSender().sendMessage(plugin.getConfig().getString("messages.tabcompleteinstanceload"));
+        this.plugin = plugin;
     }
 
 
@@ -26,6 +28,7 @@ public class BiomeRaceTabComplete implements TabCompleter {
                 values.add("ab");
                 values.add("rc");
                 values.add("help");
+                values.add("reload");
 
                 return values;
             }
