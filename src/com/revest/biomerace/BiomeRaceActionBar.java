@@ -31,6 +31,9 @@ public class BiomeRaceActionBar extends BukkitRunnable {
                 this.cancel();
             }
         }
+        if (randombiome == "") {
+            this.cancel();
+        }
     }
 
 
