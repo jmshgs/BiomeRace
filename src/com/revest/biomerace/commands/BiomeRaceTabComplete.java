@@ -18,15 +18,14 @@ public class BiomeRaceTabComplete implements TabCompleter {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, Command cmd, String string, String[] strings) {
-        if (cmd.getName().equals("updatedelay")) {
+        if (cmd.getName().toLowerCase(Locale.ROOT).equals("updatedelay")) {
             if (strings.length == 1) {
                 ArrayList<String> values = new ArrayList<>();
 
 
                 values.add("ab");
                 values.add("rc");
-
-                //Collections.sort(values);
+                values.add("help");
 
                 return values;
             }

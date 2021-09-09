@@ -97,10 +97,17 @@ public class BiomeRaceCommands implements CommandExecutor {
                         Sender.sendMessage("§bThe tick delay for checking Winner has been set to " + racechecktickdelay + " ticks. (A tick is a 20th of a second.)");
                     }
                     else {
-                        Sender.sendMessage("§4Sorry But you need so Specify What Type you want to Change and set an amount.");
+                            Sender.sendMessage("§4Sorry But you need so Specify What Type you want to Change and set an amount.");
+                        }
                     }
 
                 }
+            if (args[0].startsWith("help")) {
+                Sender.sendMessage("§bUse §e/updatedelay§b ab §c<ticks>§b for changing the action bar tick delay and use §e/updatedelay§b rc §c<ticks>§b for changing the Biome Race Biome Update Check tick delay, this means how fast it updates.");
+            }
+            else {
+                Sender.sendMessage("§4Sorry But you need so Specify What Type you want to Change and set an amount.");
+            }
 
             }
 
@@ -114,7 +121,7 @@ public class BiomeRaceCommands implements CommandExecutor {
 
 
 
-        }
+
          return true;
     }
 
