@@ -21,7 +21,7 @@ import static org.bukkit.Bukkit.getServer;
 public class BiomeRaceCommands implements CommandExecutor {
     private final BiomeRace plugin;
     public static String randombiome = "";
-    public String tickdelay;
+    public String tickdelay = "5";
     private BukkitTask task;
 
 
