@@ -13,4 +13,8 @@ public class config {
             return false;
         }
     }
+    public static String removefrontfromstring(String str, int numb) {
+        str = str.substring(numb);
+        return str;
+    }
 }

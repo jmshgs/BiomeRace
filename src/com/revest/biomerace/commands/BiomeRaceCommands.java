@@ -3,6 +3,7 @@ package com.revest.biomerace.commands;
 import com.revest.biomerace.BiomeRace;
 import com.revest.biomerace.BiomeRaceActionBar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
+import com.revest.biomerace.config.config;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -21,7 +22,8 @@ import static org.bukkit.Bukkit.getServer;
 public class BiomeRaceCommands implements CommandExecutor {
     private final BiomeRace plugin;
     public static String randombiome = "";
-    public String tickdelay = "5";
+    public String actionbartickdelay = "5";
+    public String racechecktickdelay = "100";
     private BukkitTask task;
 
 
@@ -61,8 +63,8 @@ public class BiomeRaceCommands implements CommandExecutor {
                 player.sendTitle("§bFind a " + randombiome + " biome!", ChatColor.DARK_AQUA + "§3Find the biome before your opponent!", 10, 100, 20);
 
             }
-            task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, Long.parseLong(tickdelay));
-            task = new BiomeRaceActionBar(randombiome).runTaskTimer(this.plugin, 0, Long.parseLong(tickdelay));
+            task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, Long.parseLong(racechecktickdelay));
+            task = new BiomeRaceActionBar(randombiome).runTaskTimer(this.plugin, 0, Long.parseLong(actionbartickdelay));
         }
 
         if (cmd.getName().equalsIgnoreCase("stoprace")) {
@@ -78,10 +80,30 @@ public class BiomeRaceCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {
-            if (args.length > 0 && !args[0].startsWith("0")) {
-                tickdelay = s;
-                Sender.sendMessage("§bThe tick delay has been set to " + tickdelay + "ticks. (A tick is a 20th of a second.)");
+            if (args.length > 0) {
+                if (args[0].startsWith("ab")) {
+                    actionbartickdelay = config.removefrontfromstring(s, 2);
+                    Sender.sendMessage("§bThe tick delay for updating the action bar has been set to " + actionbartickdelay + "ticks. (A tick is a 20th of a second.)");
+                }
+                else {
+                    if (args[0].startsWith("rc")) {
+                        racechecktickdelay = config.removefrontfromstring(s, 2);
+                        Sender.sendMessage("§bThe tick delay for checking Winner has been set to " + racechecktickdelay + "ticks. (A tick is a 20th of a second.)");
+                    }
+
+                }
             }
+
+
+
+
+
+
+
+
+
+
+
         }
          return true;
     }
