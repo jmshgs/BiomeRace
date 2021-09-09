@@ -3,7 +3,6 @@ package com.revest.biomerace.commands;
 import com.revest.biomerace.BiomeRace;
 import com.revest.biomerace.BiomeRaceActionBar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
-import com.revest.biomerace.config.config;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,7 +23,8 @@ public class BiomeRaceCommands implements CommandExecutor {
     public static String randombiome = "";
     public int actionbartickdelay = 5;
     public int racechecktickdelay = 100;
-    private BukkitTask task;
+    private BukkitTask ab_task;
+    private BukkitTask rc_task;
 
 
     public BiomeRaceCommands(BiomeRace plugin) {
@@ -64,12 +64,16 @@ public class BiomeRaceCommands implements CommandExecutor {
                 player.sendTitle("§bFind a " + randombiome + " biome!", ChatColor.DARK_AQUA + "§3Find the biome before your opponent!", 10, 100, 20);
 
             }
-            task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, racechecktickdelay);
-            task = new BiomeRaceActionBar(randombiome).runTaskTimer(this.plugin, 0, actionbartickdelay);
+            rc_task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, racechecktickdelay);
+            ab_task = new BiomeRaceActionBar(randombiome).runTaskTimer(this.plugin, 0, actionbartickdelay);
         }
 
         if (cmd.getName().equalsIgnoreCase("stoprace")) {
-            task.cancel();
+            if (rc_task != null) {
+                rc_task.cancel();
+                ab_task.cancel();
+            }
+
             for (Player player : getServer().getOnlinePlayers()) {
                 player.sendTitle("§bThe race has been cancelled.", "§3", 10, 100, 20);
                 randombiome = "";
