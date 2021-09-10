@@ -1,17 +1,26 @@
 package com.revest.biomerace.config;
 
+import com.revest.biomerace.BiomeRace;
+
+
+import static org.bukkit.Bukkit.getServer;
+
 public class config {
 
-    public static boolean isStringInt(String s)
-    {
-        try
-        {
-            Integer.parseInt(s);
-            return true;
-        } catch (NumberFormatException ex)
-        {
-            return false;
-        }
+    private static BiomeRace plugin;
+
+
+
+    public config(BiomeRace plugin) {
+        getServer().getConsoleSender().sendMessage(plugin.getConfig().getString("configinstanceload"));
+        config.plugin = plugin;
+
+
     }
+
+
+
+
+
 
 }

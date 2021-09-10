@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import static com.revest.biomerace.config.textstring.translatedtext;
 import static org.bukkit.Bukkit.getServer;
 
 
@@ -85,50 +86,38 @@ public class BiomeRaceCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {
-            if (args.length > 1) {
-                if (args[0].startsWith("ab")) {
-                    Sender.sendMessage(s);
-                    actionbartickdelay = Integer.parseInt(args[1]);
-                    Sender.sendMessage("§bThe tick delay for updating the action bar has been set to " + actionbartickdelay + " ticks. (A tick is a 20th of a second.)");
+
+            if (args[0].startsWith("actionbar") && args.length > 1) {
+                Sender.sendMessage(s);
+                actionbartickdelay = Integer.parseInt(args[1]);
+                Sender.sendMessage("§bThe tick delay for updating the action bar has been set to " + actionbartickdelay + " ticks. (A tick is a 20th of a second.)");
+            }
+            else {
+                if (args[0].startsWith("racecheck") && args.length > 1) {
+                    racechecktickdelay = Integer.parseInt(args[1]);
+                    Sender.sendMessage("§bThe tick delay for checking Winner has been set to " + racechecktickdelay + " ticks. (A tick is a 20th of a second.)");
                 }
                 else {
-                    if (args[0].startsWith("rc")) {
-                        racechecktickdelay = Integer.parseInt(args[1]);
-                        Sender.sendMessage("§bThe tick delay for checking Winner has been set to " + racechecktickdelay + " ticks. (A tick is a 20th of a second.)");
+                    if (args[0].startsWith("help")) {
+                        Sender.sendMessage(translatedtext("messages.updatedelayhelp"));
                     }
                     else {
+                        if (args[0].startsWith("reload")) {
+                            plugin.reloadConfig();
+                            Sender.sendMessage(translatedtext("messages.reloadconfig"));
+                        }
+                        else {
                             Sender.sendMessage("§4Sorry But you need so Specify What Type you want to Change and set an amount.");
                         }
                     }
-
                 }
-            if (args[0].startsWith("help")) {
-                Sender.sendMessage("§bUse §e/updatedelay§b §2ab §c<ticks>§b for changing the action bar tick delay and use §e/updatedelay§b §2rc §c<ticks>§b for changing the Biome Race Biome Update Check tick delay, this means how fast it updates.");
-            }
-            else {
-                if (args[0].startsWith("reload")) {
-                    plugin.reloadConfig();
-                    Sender.sendMessage(plugin.getConfig().getString("messages.reload"));
-                }
-                else {
-                    Sender.sendMessage("§4Sorry But you need so Specify What Type you want to Change and set an amount.");
-                }
-            }
 
             }
 
+        }
 
 
-
-
-
-
-
-
-
-
-
-         return true;
+        return true;
     }
 
 

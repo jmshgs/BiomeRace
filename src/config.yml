@@ -1,9 +1,13 @@
 messages:
-  reload: "§b Reloading Config!"
+  reloadconfig: "§b Reloading Config!"
   endabled: "§b[BiomeRace]: Plugin is enabled!"
   disabled: "§b[BiomeRace]: Plugin is disabled."
   tabcompleteinstanceload: "§bCreating BiomeRace Tab Instance"
+  configinstanceload: "§bCreating Config Instance"
+  translatedtextload: "§bTranslated Text Loaded"
+  updatedelayhelp: "§bUse §e/updatedelay§b §2ab §c<ticks>§b for changing the action bar tick delay and use §e/updatedelay§b §2rc §c<ticks>§b for changing the Biome Race Biome Update Check tick delay, this means how fast it updates."
   firsttobiome: "§b %s found the biome first!"
   ggmsg: "§3ggs"
   currentbiome: "§3 Current Biome: %s"
   lookforbiome: "§5 Looking For: %s"
+  

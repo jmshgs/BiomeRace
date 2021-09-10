@@ -5,16 +5,15 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 
+import static com.revest.biomerace.config.textstring.translatedtext;
 import static org.bukkit.Bukkit.getServer;
 
 import java.util.*;
 
 public class BiomeRaceTabComplete implements TabCompleter {
-    private final BiomeRace plugin;
 
     public BiomeRaceTabComplete(BiomeRace plugin) {
-        getServer().getConsoleSender().sendMessage(plugin.getConfig().getString("messages.tabcompleteinstanceload"));
-        this.plugin = plugin;
+        getServer().getConsoleSender().sendMessage(translatedtext("messages.tabcompleteinstanceload"));
     }
 
 
@@ -25,11 +24,16 @@ public class BiomeRaceTabComplete implements TabCompleter {
                 ArrayList<String> values = new ArrayList<>();
 
 
-                values.add("ab");
-                values.add("rc");
+                values.add("actionbar");
+                values.add("racecheck");
                 values.add("help");
                 values.add("reload");
 
+                return values;
+            }
+            if (strings.length > 1) {
+                ArrayList<String> values = new ArrayList<>();
+                values.add("0");
                 return values;
             }
 
