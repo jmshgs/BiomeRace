@@ -30,6 +30,9 @@ public class BiomeRace extends JavaPlugin {
         getCommand("updatedelay").setTabCompleter(tabComplete);
         getServer().getConsoleSender().sendMessage(translatedtext("messages.endabled"));
         this.saveDefaultConfig();
+        commands.actionbartickdelay = Integer.parseInt(translatedtext("delay.actionbartickdelay"));
+        commands.racechecktickdelay = Integer.parseInt(translatedtext("delay.racechecktickdelay"));
+
 
     }
 

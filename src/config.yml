@@ -1,3 +1,7 @@
+delay:
+  actionbartickdelay: 5
+  racechecktickdelay: 100
+
 messages:
   reloadconfig: "§b Reloading Config!"
   endabled: "§b[BiomeRace]: Plugin is enabled!"
@@ -10,4 +14,17 @@ messages:
   ggmsg: "§3ggs"
   currentbiome: "§3 Current Biome: %s"
   lookforbiome: "§5 Looking For: %s"
+  onlineplayers: "§bPlayers Online: %s"
+  racestarttitle: "§bFind a %s biome!"
+  racestartsubtitle: " "§3Find the biome before your opponent!"
+  racecanceltitle: "§bThe race has been cancelled."
+  racecancelsubtitle: ""
+  racestatus: "§bLooking for a %s biome currently."
+  racecheckupdatedesription: "§bThe tick delay for checking Winner has been set to %s ticks. (A tick is a 20th of a second.)"
+  actionbarupdatedesription: "§bThe tick delay for updating the action bar has been set to " + actionbartickdelay + " ticks. (A tick is a 20th of a second.)"
+
+
+
+
+
   

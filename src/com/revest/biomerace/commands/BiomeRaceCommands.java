@@ -3,7 +3,6 @@ package com.revest.biomerace.commands;
 import com.revest.biomerace.BiomeRace;
 import com.revest.biomerace.BiomeRaceActionBar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,6 +14,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import static com.revest.biomerace.config.textstring.settoconfigwithint;
 import static com.revest.biomerace.config.textstring.translatedtext;
 import static org.bukkit.Bukkit.getServer;
 
@@ -54,7 +54,7 @@ public class BiomeRaceCommands implements CommandExecutor {
                 playersonline.add(playername);
             }
             String playersonlinestring = String.join(", ", playersonline);
-            Sender.sendMessage(ChatColor.AQUA + "Players online: " + playersonlinestring);
+            Sender.sendMessage(translatedtext("messages.onlineplayers", playersonlinestring));
         }
 
         if (cmd.getName().equalsIgnoreCase("startrace")) {
@@ -62,7 +62,7 @@ public class BiomeRaceCommands implements CommandExecutor {
             int randomidx = new Random().nextInt(biomes.length);
             randombiome = biomes[randomidx];
             for (Player player : getServer().getOnlinePlayers()) {
-                player.sendTitle("§bFind a " + randombiome + " biome!", ChatColor.DARK_AQUA + "§3Find the biome before your opponent!", 10, 100, 20);
+                player.sendTitle(translatedtext("messages.racestarttitle",randombiome), translatedtext("messages.racestartsubtitle"), 10, 100, 20);
 
             }
             rc_task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, racechecktickdelay);
@@ -76,26 +76,27 @@ public class BiomeRaceCommands implements CommandExecutor {
             }
 
             for (Player player : getServer().getOnlinePlayers()) {
-                player.sendTitle("§bThe race has been cancelled.", "§3", 10, 100, 20);
+                player.sendTitle(translatedtext("messages.racecanceltitle"), translatedtext("messages.racecancelsubtitle"), 10, 100, 20);
                 randombiome = "";
             }
         }
 
         if (cmd.getName().equalsIgnoreCase("racestatus")) {
-            Sender.sendMessage("§bLooking for a " + randombiome + " biome currently.");
+            Sender.sendMessage(translatedtext("messages.racestatus", randombiome));
         }
 
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {
 
             if (args[0].startsWith("actionbar") && args.length > 1) {
-                Sender.sendMessage(s);
                 actionbartickdelay = Integer.parseInt(args[1]);
-                Sender.sendMessage("§bThe tick delay for updating the action bar has been set to " + actionbartickdelay + " ticks. (A tick is a 20th of a second.)");
+                settoconfigwithint("delay.actionbartickdelay", actionbartickdelay);
+                Sender.sendMessage(translatedtext("messages.actionbarupdatedesription", Integer.toString(actionbartickdelay)));
             }
             else {
                 if (args[0].startsWith("racecheck") && args.length > 1) {
                     racechecktickdelay = Integer.parseInt(args[1]);
-                    Sender.sendMessage("§bThe tick delay for checking Winner has been set to " + racechecktickdelay + " ticks. (A tick is a 20th of a second.)");
+                    settoconfigwithint("delay.racechecktickdelay", racechecktickdelay);
+                    Sender.sendMessage(translatedtext("messages.racecheckupdatedesription", Integer.toString(racechecktickdelay)));
                 }
                 else {
                     if (args[0].startsWith("help")) {

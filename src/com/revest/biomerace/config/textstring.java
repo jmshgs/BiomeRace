@@ -26,7 +26,12 @@ public class textstring {
         getServer().getConsoleSender().sendMessage(translatedtext("translatedtextload"));
     }
 
-
+    public static void settoconfig(String path, String value) {
+        plugin.getConfig().set(path, value);
+    }
+    public static void settoconfigwithint(String path, Integer value) {
+        plugin.getConfig().set(path, value);
+    }
 
     public static String translatedtext(String s, String... replace) {
         String rawtext = plugin.getConfig().getString(ChatColor.translateAlternateColorCodes('&', s));

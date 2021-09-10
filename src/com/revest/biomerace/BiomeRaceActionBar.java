@@ -9,6 +9,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Locale;
 
+import static com.revest.biomerace.config.textstring.translatedtext;
+
 public class BiomeRaceActionBar extends BukkitRunnable {
     private final String randombiome;
 
@@ -22,9 +24,9 @@ public class BiomeRaceActionBar extends BukkitRunnable {
         for (Player player : Bukkit.getOnlinePlayers()) {
             String currentbiome = player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT);
             if (!player.isSneaking()) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(String.format("plugin.getConfig().getString(\"messages.currentbiome\")", currentbiome)));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(translatedtext("messages.currentbiome", currentbiome)));
             } else {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(String.format("plugin.getConfig().getString(\"messages.lookforbiome\")", randombiome)));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent((translatedtext("messages.lookforbiome", randombiome))));
             }
             if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) {
                 // Stop loop if player found the biome.
