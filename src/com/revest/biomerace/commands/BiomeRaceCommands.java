@@ -1,6 +1,7 @@
 package com.revest.biomerace.commands;
 
 import com.revest.biomerace.BiomeRace;
+import com.revest.biomerace.BiomeRaceActionBar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,8 +20,11 @@ import static org.bukkit.Bukkit.getServer;
 
 public class BiomeRaceCommands implements CommandExecutor {
     private final BiomeRace plugin;
-    private String randombiome = "";
+    public static String randombiome = "";
+    public int actionbartickdelay = 20;
+    public int racechecktickdelay = 100;
     private BukkitTask task;
+
 
     public BiomeRaceCommands(BiomeRace plugin) {
         getServer().getConsoleSender().sendMessage("Creating BiomeRace Commands Instance");
@@ -28,7 +32,7 @@ public class BiomeRaceCommands implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String s, String[] strings) {
+    public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         if (!(sender instanceof Player)) {
             return true;
         }
@@ -56,22 +60,42 @@ public class BiomeRaceCommands implements CommandExecutor {
             randombiome = biomes[randomidx];
             for (Player player : getServer().getOnlinePlayers()) {
                 player.sendTitle(ChatColor.AQUA + "Find a " + randombiome + " biome!", ChatColor.DARK_AQUA + "Find the biome before your opponent!", 10, 100, 20);
+
             }
-            task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, 100);
+            task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, racechecktickdelay);
+            task = new BiomeRaceActionBar(randombiome).runTaskTimer(this.plugin, 0, actionbartickdelay);
         }
 
         if (cmd.getName().equalsIgnoreCase("stoprace")) {
             task.cancel();
             for (Player player : getServer().getOnlinePlayers()) {
                 player.sendTitle(ChatColor.AQUA + "The race has been cancelled.", ChatColor.DARK_AQUA + "", 10, 100, 20);
+                randombiome = "";
             }
         }
 
         if (cmd.getName().equalsIgnoreCase("racestatus")) {
             Sender.sendMessage(ChatColor.AQUA + "Looking for a " + randombiome + " biome currently.");
         }
-         return true;
+
+        if (cmd.getName().equalsIgnoreCase("updatedelay")) {
+            if (args.length > 1) {
+                if (args[0].startsWith("ab")) {
+                    actionbartickdelay = Integer.parseInt(args[1]);
+                    Sender.sendMessage("§bThe tick delay for updating the action bar has been set to " + actionbartickdelay + " ticks. (A tick is a 20th of a second.)");
+                } else {
+                    if (args[0].startsWith("rc")) {
+                        racechecktickdelay = Integer.parseInt(args[1]);
+                        Sender.sendMessage("§bThe tick delay for checking players has been set to " + racechecktickdelay + " ticks. (A tick is a 20th of a second.)");
+                    } else {
+                        Sender.sendMessage("§bPlease specify what tick delay you would like to change and set an amount.");
+                    }
+
+                }
+            }
+            return true;
+        }
+        return true;
+
     }
-
-
 }
