@@ -16,12 +16,12 @@ messages:
   lookforbiome: "§5 Looking For: %s"
   onlineplayers: "§bPlayers Online: %s"
   racestarttitle: "§bFind a %s biome!"
-  racestartsubtitle: " "§3Find the biome before your opponent!"
+  racestartsubtitle: "§3Find the biome before your opponent!"
   racecanceltitle: "§bThe race has been cancelled."
   racecancelsubtitle: ""
   racestatus: "§bLooking for a %s biome currently."
   racecheckupdatedesription: "§bThe tick delay for checking Winner has been set to %s ticks. (A tick is a 20th of a second.)"
-  actionbarupdatedesription: "§bThe tick delay for updating the action bar has been set to " + actionbartickdelay + " ticks. (A tick is a 20th of a second.)"
+  actionbarupdatedesription: "§bThe tick delay for updating the action bar has been set to %s ticks. (A tick is a 20th of a second.)"
 
 
 

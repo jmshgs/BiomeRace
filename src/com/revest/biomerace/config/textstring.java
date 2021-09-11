@@ -23,7 +23,7 @@ public class textstring {
 
     public static void enable(BiomeRace plugin) {
         textstring.plugin = plugin;
-        getServer().getConsoleSender().sendMessage(translatedtext("translatedtextload"));
+        getServer().getConsoleSender().sendMessage(translatedtext("messages.translatedtextload"));
     }
 
     public static void settoconfig(String path, String value) {
