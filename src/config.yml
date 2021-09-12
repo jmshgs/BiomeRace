@@ -4,7 +4,7 @@ delay:
 
 messages:
   reloadconfig: "§b Reloading Config!"
-  endabled: "§b[BiomeRace]: Plugin is enabled!"
+  enabled: "§b[BiomeRace]: Plugin is enabled!"
   disabled: "§b[BiomeRace]: Plugin is disabled."
   tabcompleteinstanceload: "§bCreating BiomeRace Tab Instance"
   configinstanceload: "§bCreating Config Instance"

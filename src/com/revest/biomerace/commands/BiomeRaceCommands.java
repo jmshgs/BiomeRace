@@ -17,6 +17,7 @@ import java.util.Random;
 
 import static com.revest.biomerace.config.textstring.settoconfigwithint;
 import static com.revest.biomerace.config.textstring.translatedtext;
+import static org.bukkit.Bukkit.getConsoleSender;
 import static org.bukkit.Bukkit.getServer;
 
 
@@ -87,6 +88,9 @@ public class BiomeRaceCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {
+            if (args[0] == null) {
+                Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
+            }
 
             if (args[0].startsWith("actionbar") && args.length > 1) {
                 actionbartickdelay = Integer.parseInt(args[1]);
@@ -113,16 +117,19 @@ public class BiomeRaceCommands implements CommandExecutor {
                                 Sender.sendMessage(translatedtext("messages.updatedelayvalues"));
                             }
                             else {
-                                Sender.sendMessage(translatedtext("messages.updatedelayinputless", Integer.toString(actionbartickdelay), Integer.toString(racechecktickdelay)));
+                                Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
                             }
+
                         }
+
                     }
+
                 }
 
             }
-            if (args[0].equalsIgnoreCase("")) {
-                Sender.sendMessage(translatedtext("messages.updatedelayusage"));
-            }
+            Sender.sendMessage("TESTING");
+
+
 
         }
 

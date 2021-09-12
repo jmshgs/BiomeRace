@@ -3,6 +3,7 @@ package com.revest.biomerace.config;
 import com.revest.biomerace.BiomeRace;
 
 
+import static com.revest.biomerace.config.textstring.translatedtext;
 import static org.bukkit.Bukkit.getServer;
 
 public class config {
@@ -12,8 +13,9 @@ public class config {
 
 
     public config(BiomeRace plugin) {
-        getServer().getConsoleSender().sendMessage(plugin.getConfig().getString("configinstanceload"));
         config.plugin = plugin;
+        getServer().getConsoleSender().sendMessage(translatedtext("messages.configinstanceload"));
+
 
 
     }
