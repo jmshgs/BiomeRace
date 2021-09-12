@@ -88,7 +88,7 @@ public class BiomeRaceCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {
-            if (args[0] == null) {
+            if (s.equals(null)) {
                 Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
             }
 
