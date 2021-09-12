@@ -3,6 +3,7 @@ package com.revest.biomerace.commands;
 import com.revest.biomerace.BiomeRace;
 import com.revest.biomerace.BiomeRaceActionBar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -96,7 +97,7 @@ public class BiomeRaceCommands implements CommandExecutor {
                 if (args[0].startsWith("racecheck") && args.length > 1) {
                     racechecktickdelay = Integer.parseInt(args[1]);
                     settoconfigwithint("delay.racechecktickdelay", racechecktickdelay);
-                    Sender.sendMessage(translatedtext("messages.racecheckupdatedesription", Integer.toString(racechecktickdelay), "YOOOO"));
+                    Sender.sendMessage(translatedtext("messages.racecheckupdatedesription", Integer.toString(racechecktickdelay)));
                 }
                 else {
                     if (args[0].startsWith("help")) {
@@ -108,7 +109,7 @@ public class BiomeRaceCommands implements CommandExecutor {
                             Sender.sendMessage(translatedtext("messages.reloadconfig"));
                         }
                         else {
-                            Sender.sendMessage("§4Sorry But you need so Specify What Type you want to Change and set an amount.");
+                            Sender.sendMessage(translatedtext("messages.updatedelayinputless", Integer.toString(actionbartickdelay), Integer.toString(racechecktickdelay)));
                         }
                     }
                 }

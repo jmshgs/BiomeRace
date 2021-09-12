@@ -34,51 +34,17 @@ public class textstring {
     }
 
     public static String translatedtext(String s, String... replace) {
-
+        //seems to work just as good as Vanilla Client version and Works good with config.
         String rawtext = plugin.getConfig().getString(s);
         if (rawtext == null) {
             rawtext = "ERROR NULL";
         }
-        List<String> strslist = new ArrayList<String>();
-        if (replace != null) {
-            for (String ssss : replace) {
-                strslist.add(ssss);
-            }
-        }
-        else {
-                strslist.add("THEREISNOTHING");
-
-            }
 
 
-        String newtext = String.format(rawtext, strslist);
+
+        String newtext = String.format(rawtext, replace);
         return ChatColor.translateAlternateColorCodes('&', newtext);
     }
 
 
 }
-/*
-    OLD translated text code, Might need to work on it to get lists working idk
-
-    public static String translatedtext(String s, String... replace) {
-
-        String rawtext = plugin.getConfig().getString(s);
-        if (rawtext == null) {
-            rawtext = "ERROR NULL";
-        }
-        List<String> strslist = new ArrayList<String>();
-        if (replace != null) {
-            for (String ssss : replace) {
-                strslist.add(ssss);
-            }
-        }
-        else {
-                strslist.add("THEREISNOTHING");
-
-            }
-
-
-        String newtext = String.format(rawtext, strslist);
-        return ChatColor.translateAlternateColorCodes('&', newtext);
-    }
- */
