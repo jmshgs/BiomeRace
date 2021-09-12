@@ -28,6 +28,7 @@ public class BiomeRaceTabComplete implements TabCompleter {
                 values.add("racecheck");
                 values.add("help");
                 values.add("reload");
+                values.add("values");
 
                 return values;
             }

@@ -109,11 +109,19 @@ public class BiomeRaceCommands implements CommandExecutor {
                             Sender.sendMessage(translatedtext("messages.reloadconfig"));
                         }
                         else {
-                            Sender.sendMessage(translatedtext("messages.updatedelayinputless", Integer.toString(actionbartickdelay), Integer.toString(racechecktickdelay)));
+                            if (args[0].startsWith("values")) {
+                                Sender.sendMessage(translatedtext("messages.updatedelayvalues"));
+                            }
+                            else {
+                                Sender.sendMessage(translatedtext("messages.updatedelayinputless", Integer.toString(actionbartickdelay), Integer.toString(racechecktickdelay)));
+                            }
                         }
                     }
                 }
 
+            }
+            if (args[0].equalsIgnoreCase("")) {
+                Sender.sendMessage(translatedtext("messages.updatedelayusage"));
             }
 
         }
