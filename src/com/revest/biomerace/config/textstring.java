@@ -49,7 +49,7 @@ public class textstring {
 
             }
 
-        
+
         String newtext = String.format(rawtext, strslist);
         return ChatColor.translateAlternateColorCodes('&', newtext);
     }
