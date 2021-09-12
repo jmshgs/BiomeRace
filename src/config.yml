@@ -20,7 +20,7 @@ messages:
   racecanceltitle: "§bThe race has been cancelled."
   racecancelsubtitle: ""
   racestatus: "§bLooking for a %s biome currently."
-  racecheckupdatedesription: "§bThe tick delay for checking Winner has been set to %s ticks. (A tick is a 20th of a second.)"
+  racecheckupdatedesription: "§bThe tick delay for checking Winner has been set to %s ticks. %s (A tick is a 20th of a second.)"
   actionbarupdatedesription: "§bThe tick delay for updating the action bar has been set to %s ticks. (A tick is a 20th of a second.)"
 
 

@@ -96,7 +96,7 @@ public class BiomeRaceCommands implements CommandExecutor {
                 if (args[0].startsWith("racecheck") && args.length > 1) {
                     racechecktickdelay = Integer.parseInt(args[1]);
                     settoconfigwithint("delay.racechecktickdelay", racechecktickdelay);
-                    Sender.sendMessage(translatedtext("messages.racecheckupdatedesription", Integer.toString(racechecktickdelay)));
+                    Sender.sendMessage(translatedtext("messages.racecheckupdatedesription", Integer.toString(racechecktickdelay), "YOOOO"));
                 }
                 else {
                     if (args[0].startsWith("help")) {
