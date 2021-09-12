@@ -34,7 +34,7 @@ public class textstring {
     }
 
     public static String translatedtext(String s, String... replace) {
-        String rawtext = plugin.getConfig().getString(ChatColor.translateAlternateColorCodes('&', s));
+        String rawtext = plugin.getConfig().getString(s);
         if (rawtext == null) {
             rawtext = "ERROR NULL";
         }
@@ -46,10 +46,12 @@ public class textstring {
         }
         else {
                 strslist.add("THEREISNOTHING");
+
             }
 
-        String.format(rawtext, strslist);
-        return rawtext;
+        
+        String newtext = String.format(rawtext, strslist);
+        return ChatColor.translateAlternateColorCodes('&', newtext);
     }
 
 
