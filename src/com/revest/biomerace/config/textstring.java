@@ -31,6 +31,7 @@ public class textstring {
     }
     public static void settoconfigwithint(String path, Integer value) {
         plugin.getConfig().set(path, value);
+        plugin.saveConfig();
     }
 
     public static String translatedtext(String s, String... replace) {
