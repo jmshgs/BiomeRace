@@ -86,7 +86,7 @@ public class BiomeRaceCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {
-            if (args[0].equalsIgnoreCase(null)) {
+            if (args.length < 1) {
                 Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
             }
             if (args[0].startsWith("actionbar") && args.length > 1) {
@@ -102,12 +102,10 @@ public class BiomeRaceCommands implements CommandExecutor {
             if (args[0].startsWith("help")) {
                 Sender.sendMessage(translatedtext("messages.updatedelayhelp"));
             }
-
             if (args[0].startsWith("reload")) {
                 plugin.reloadConfig();
                 Sender.sendMessage(translatedtext("messages.reloadconfig"));
             }
-
             if (args[0].startsWith("values")) {
                 Sender.sendMessage(translatedtext("messages.updatedelayvalues"));
             }
