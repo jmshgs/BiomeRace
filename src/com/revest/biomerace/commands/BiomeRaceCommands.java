@@ -3,7 +3,6 @@ package com.revest.biomerace.commands;
 import com.revest.biomerace.BiomeRace;
 import com.revest.biomerace.BiomeRaceActionBar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +16,6 @@ import java.util.Random;
 
 import static com.revest.biomerace.config.textstring.settoconfigwithint;
 import static com.revest.biomerace.config.textstring.translatedtext;
-import static org.bukkit.Bukkit.getConsoleSender;
 import static org.bukkit.Bukkit.getServer;
 
 
@@ -88,54 +86,40 @@ public class BiomeRaceCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {
-            if (s.equals(null)) {
+            if (args[0].equalsIgnoreCase(null)) {
                 Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
             }
-
             if (args[0].startsWith("actionbar") && args.length > 1) {
                 actionbartickdelay = Integer.parseInt(args[1]);
                 settoconfigwithint("delay.actionbartickdelay", actionbartickdelay);
                 Sender.sendMessage(translatedtext("messages.actionbarupdatedesription", Integer.toString(actionbartickdelay)));
             }
-            else {
-                if (args[0].startsWith("racecheck") && args.length > 1) {
-                    racechecktickdelay = Integer.parseInt(args[1]);
-                    settoconfigwithint("delay.racechecktickdelay", racechecktickdelay);
-                    Sender.sendMessage(translatedtext("messages.racecheckupdatedesription", Integer.toString(racechecktickdelay)));
-                }
+            if (args[0].startsWith("racecheck") && args.length > 1) {
+                racechecktickdelay = Integer.parseInt(args[1]);
+                settoconfigwithint("delay.racechecktickdelay", racechecktickdelay);
+                Sender.sendMessage(translatedtext("messages.racecheckupdatedesription", Integer.toString(racechecktickdelay)));
+            }
+            if (args[0].startsWith("help")) {
+                Sender.sendMessage(translatedtext("messages.updatedelayhelp"));
+            }
+
+            if (args[0].startsWith("reload")) {
+                plugin.reloadConfig();
+                Sender.sendMessage(translatedtext("messages.reloadconfig"));
+            }
+
+            if (args[0].startsWith("values")) {
+                Sender.sendMessage(translatedtext("messages.updatedelayvalues"));
+            }
                 else {
-                    if (args[0].startsWith("help")) {
-                        Sender.sendMessage(translatedtext("messages.updatedelayhelp"));
-                    }
-                    else {
-                        if (args[0].startsWith("reload")) {
-                            plugin.reloadConfig();
-                            Sender.sendMessage(translatedtext("messages.reloadconfig"));
-                        }
-                        else {
-                            if (args[0].startsWith("values")) {
-                                Sender.sendMessage(translatedtext("messages.updatedelayvalues"));
-                            }
-                            else {
-                                Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
-                            }
-
-                        }
-
-                    }
-
+                Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
                 }
 
             }
-            Sender.sendMessage("TESTING");
+        return true;
 
-
-
+            }
         }
 
 
-        return true;
-    }
 
-
-}
