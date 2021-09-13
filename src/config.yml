@@ -24,7 +24,7 @@ messages:
   actionbarupdatedesription: "§bThe tick delay for updating the action bar has been set to %s ticks. (A tick is a 20th of a second.)"
   updatedelayinputless: "§bPlease specify the amount of ticks you'd like to change."
   updatedelayvalues: "§b Action Bar Value: %s , Race Check Value: %s"
-  updatedelayusage: "§b Please Enter a Type, you can use, /updatedelay reload to reload the config, this will add whatever manual changes you added to the config into the game."
+  updatedelayusage: "§b Please enter a type, you can use, /updatedelay reload to reload the config, this will add whatever manual changes you added to the config into the game."
 
 
 
