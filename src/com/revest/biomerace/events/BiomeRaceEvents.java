@@ -1,19 +1,23 @@
 package com.revest.biomerace.events;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
+import com.revest.biomerace.BiomeRace;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerMoveEvent;
+
+
 
 public class BiomeRaceEvents implements Listener {
+    private final BiomeRace plugin;
+    public BiomeRaceEvents(BiomeRace plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public static void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        player.sendMessage(ChatColor.AQUA + "Welcome! :D");
+        player.sendMessage("§bWelcome! :D");
     }
 
 }

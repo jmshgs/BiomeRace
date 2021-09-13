@@ -3,7 +3,6 @@ package com.revest.biomerace.commands;
 import com.revest.biomerace.BiomeRace;
 import com.revest.biomerace.BiomeRaceActionBar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,15 +14,18 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import static com.revest.biomerace.config.textstring.settoconfigwithint;
+import static com.revest.biomerace.config.textstring.translatedtext;
 import static org.bukkit.Bukkit.getServer;
 
 
 public class BiomeRaceCommands implements CommandExecutor {
     private final BiomeRace plugin;
     public static String randombiome = "";
-    public int actionbartickdelay = 20;
+    public int actionbartickdelay = 5;
     public int racechecktickdelay = 100;
-    private BukkitTask task;
+    private BukkitTask ab_task;
+    private BukkitTask rc_task;
 
 
     public BiomeRaceCommands(BiomeRace plugin) {
@@ -39,10 +41,10 @@ public class BiomeRaceCommands implements CommandExecutor {
         Player Sender = (Player) sender;
         String[] biomes = {"jungle", "desert", "plains", "basalt_deltas", "savanna", "swamp", "taiga",
                 "mountains", "forest", "warped_forest", "crimson_forest", "nether_wastes"};
+        String currentbiome = Sender.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT);
 
         if (cmd.getName().equalsIgnoreCase("biome")) {
-            Sender.sendMessage(ChatColor.AQUA + "You are currently in a " + (ChatColor.AQUA + (Sender.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT)
-                    + "" + ChatColor.AQUA + " biome.")));
+            Sender.sendMessage("§bYou are currently in a " + currentbiome + "§b biome.");
         }
 
         if (cmd.getName().equalsIgnoreCase("pplonline")) {
@@ -52,50 +54,70 @@ public class BiomeRaceCommands implements CommandExecutor {
                 playersonline.add(playername);
             }
             String playersonlinestring = String.join(", ", playersonline);
-            Sender.sendMessage(ChatColor.AQUA + "Players online: " + playersonlinestring);
+            Sender.sendMessage(translatedtext("messages.onlineplayers", playersonlinestring));
         }
 
         if (cmd.getName().equalsIgnoreCase("startrace")) {
+            randombiome = "";
             int randomidx = new Random().nextInt(biomes.length);
             randombiome = biomes[randomidx];
             for (Player player : getServer().getOnlinePlayers()) {
-                player.sendTitle(ChatColor.AQUA + "Find a " + randombiome + " biome!", ChatColor.DARK_AQUA + "Find the biome before your opponent!", 10, 100, 20);
+                player.sendTitle(translatedtext("messages.racestarttitle",randombiome), translatedtext("messages.racestartsubtitle"), 10, 100, 20);
 
             }
-            task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, racechecktickdelay);
-            task = new BiomeRaceActionBar(randombiome).runTaskTimer(this.plugin, 0, actionbartickdelay);
+            rc_task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, racechecktickdelay);
+            ab_task = new BiomeRaceActionBar(randombiome).runTaskTimer(this.plugin, 0, actionbartickdelay);
         }
 
         if (cmd.getName().equalsIgnoreCase("stoprace")) {
-            task.cancel();
+            if (rc_task != null) {
+                rc_task.cancel();
+                ab_task.cancel();
+            }
+
             for (Player player : getServer().getOnlinePlayers()) {
-                player.sendTitle(ChatColor.AQUA + "The race has been cancelled.", ChatColor.DARK_AQUA + "", 10, 100, 20);
+                player.sendTitle(translatedtext("messages.racecanceltitle"), translatedtext("messages.racecancelsubtitle"), 10, 100, 20);
                 randombiome = "";
             }
         }
 
         if (cmd.getName().equalsIgnoreCase("racestatus")) {
-            Sender.sendMessage(ChatColor.AQUA + "Looking for a " + randombiome + " biome currently.");
+            Sender.sendMessage(translatedtext("messages.racestatus", randombiome));
         }
 
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {
-            if (args.length > 1) {
-                if (args[0].startsWith("ab")) {
-                    actionbartickdelay = Integer.parseInt(args[1]);
-                    Sender.sendMessage("§bThe tick delay for updating the action bar has been set to " + actionbartickdelay + " ticks. (A tick is a 20th of a second.)");
-                } else {
-                    if (args[0].startsWith("rc")) {
-                        racechecktickdelay = Integer.parseInt(args[1]);
-                        Sender.sendMessage("§bThe tick delay for checking players has been set to " + racechecktickdelay + " ticks. (A tick is a 20th of a second.)");
-                    } else {
-                        Sender.sendMessage("§bPlease specify what tick delay you would like to change and set an amount.");
-                    }
-
-                }
+            if (args.length < 1) {
+                Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
             }
-            return true;
-        }
+            if (args[0].startsWith("actionbar") && args.length > 1) {
+                actionbartickdelay = Integer.parseInt(args[1]);
+                settoconfigwithint("delay.actionbartickdelay", actionbartickdelay);
+                Sender.sendMessage(translatedtext("messages.actionbarupdatedesription", Integer.toString(actionbartickdelay)));
+            }
+            if (args[0].startsWith("racecheck") && args.length > 1) {
+                racechecktickdelay = Integer.parseInt(args[1]);
+                settoconfigwithint("delay.racechecktickdelay", racechecktickdelay);
+                Sender.sendMessage(translatedtext("messages.racecheckupdatedesription", Integer.toString(racechecktickdelay)));
+            }
+            if (args[0].startsWith("help")) {
+                Sender.sendMessage(translatedtext("messages.updatedelayhelp"));
+            }
+            if (args[0].startsWith("reload")) {
+                plugin.reloadConfig();
+                Sender.sendMessage(translatedtext("messages.reloadconfig"));
+            }
+            if (args[0].startsWith("values")) {
+                Sender.sendMessage(translatedtext("messages.updatedelayvalues"));
+            }
+                else {
+                Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
+                }
+
+            }
         return true;
 
-    }
-}
+            }
+        }
+
+
+

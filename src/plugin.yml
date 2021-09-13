@@ -29,3 +29,8 @@ commands:
     usage: /stoprace
     permission:
       default: op
+  updatedelay:
+    description: Changes the tick update delay of the player's location.
+    usage: /updatedelay {Amount of ticks}
+    permission:
+      default: op
