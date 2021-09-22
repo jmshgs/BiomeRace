@@ -44,7 +44,7 @@ public class BiomeRaceCommands implements CommandExecutor {
         String currentbiome = Sender.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT);
 
         if (cmd.getName().equalsIgnoreCase("biome")) {
-            Sender.sendMessage("§bYou are currently in a " + currentbiome + "§b biome.");
+            Sender.sendMessage("§bYou are currently in a " + currentbiome.replace("_", " ") + "§b biome.");
         }
 
         if (cmd.getName().equalsIgnoreCase("pplonline")) {
@@ -62,7 +62,7 @@ public class BiomeRaceCommands implements CommandExecutor {
             int randomidx = new Random().nextInt(biomes.length);
             randombiome = biomes[randomidx];
             for (Player player : getServer().getOnlinePlayers()) {
-                player.sendTitle(translatedtext("messages.racestarttitle",randombiome), translatedtext("messages.racestartsubtitle"), 10, 100, 20);
+                player.sendTitle(translatedtext("messages.racestarttitle",randombiome.replace("_", " ")), translatedtext("messages.racestartsubtitle"), 10, 100, 20);
 
             }
             rc_task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, racechecktickdelay);
@@ -82,7 +82,7 @@ public class BiomeRaceCommands implements CommandExecutor {
         }
 
         if (cmd.getName().equalsIgnoreCase("racestatus")) {
-            Sender.sendMessage(translatedtext("messages.racestatus", randombiome));
+            Sender.sendMessage(translatedtext("messages.racestatus", randombiome.replace("_", " ")));
         }
 
         if (cmd.getName().equalsIgnoreCase("updatedelay")) {

@@ -24,9 +24,9 @@ public class BiomeRaceActionBar extends BukkitRunnable {
         for (Player player : Bukkit.getOnlinePlayers()) {
             String currentbiome = player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT);
             if (!player.isSneaking()) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(translatedtext("messages.currentbiome", currentbiome)));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(translatedtext("messages.currentbiome", currentbiome.replace("_", " "))));
             } else {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent((translatedtext("messages.lookforbiome", randombiome))));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent((translatedtext("messages.lookforbiome", randombiome.replace("_", " ")))));
             }
             if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) {
                 // Stop loop if player found the biome.
