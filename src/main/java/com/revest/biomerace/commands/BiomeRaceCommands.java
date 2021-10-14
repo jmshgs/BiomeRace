@@ -17,6 +17,7 @@ import java.util.Random;
 import static com.revest.biomerace.config.textstring.settoconfigwithint;
 import static com.revest.biomerace.config.textstring.translatedtext;
 import static org.bukkit.Bukkit.getServer;
+import static org.bukkit.Bukkit.getWorld;
 
 
 public class BiomeRaceCommands implements CommandExecutor {
