@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
+import static java.lang.Double.MAX_VALUE;
 import static org.bukkit.Bukkit.getServer;
 
 
@@ -21,23 +22,26 @@ public class BiomeRaceEvents implements Listener {
 
     @EventHandler
     public static void onPlayerJoin(PlayerJoinEvent event) {
-        Player closeplayer = null;
-        boolean whilebool = true;
-        Player player = event.getPlayer();
-        player.sendMessage("§bWelcome! :D");
-        if (!player.getInventory().containsAtLeast(new ItemStack(Material.COMPASS), 1)) {
-            player.getInventory().addItem(new ItemStack(Material.COMPASS, 1));
+        Player closestplayer = null;
+        double closestdistance = MAX_VALUE;
+
+        Player mainplayer = event.getPlayer();
+        mainplayer.sendMessage("§bWelcome! :D");
+        if (!mainplayer.getInventory().containsAtLeast(new ItemStack(Material.COMPASS), 1)) {
+            mainplayer.getInventory().addItem(new ItemStack(Material.COMPASS, 1));
         }
-        while (whilebool = true) {
-            for (Player currentplayer : getServer().getOnlinePlayers()) {
-                if (currentplayer == player) {
-                    Location location = currentplayer.getLocation();
-                    Location location2 = player.getLocation();
-                    double distance = location.distance(location2);
+        for (Player player2 : getServer().getOnlinePlayers()) {
+            if (player2 != mainplayer) {
+                Location location = mainplayer.getLocation();
+                Location location2 = player2.getLocation();
+                double distance = location.distance(location2);
 
+                if (distance < closestdistance) {
+                    closestdistance = distance;
+                    closestplayer = player2;
                 }
-
             }
+            mainplayer.setCompassTarget(closestplayer.getLocation());
         }
     }
 }

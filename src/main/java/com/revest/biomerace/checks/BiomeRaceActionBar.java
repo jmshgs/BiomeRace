@@ -1,4 +1,4 @@
-package com.revest.biomerace;
+package com.revest.biomerace.checks;
 
 
 import net.md_5.bungee.api.ChatMessageType;
