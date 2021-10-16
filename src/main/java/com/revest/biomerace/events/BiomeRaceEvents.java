@@ -22,26 +22,10 @@ public class BiomeRaceEvents implements Listener {
 
     @EventHandler
     public static void onPlayerJoin(PlayerJoinEvent event) {
-        Player closestplayer = null;
-        double closestdistance = MAX_VALUE;
-
         Player mainplayer = event.getPlayer();
         mainplayer.sendMessage("§bWelcome! :D");
         if (!mainplayer.getInventory().containsAtLeast(new ItemStack(Material.COMPASS), 1)) {
             mainplayer.getInventory().addItem(new ItemStack(Material.COMPASS, 1));
-        }
-        for (Player player2 : getServer().getOnlinePlayers()) {
-            if (player2 != mainplayer) {
-                Location location = mainplayer.getLocation();
-                Location location2 = player2.getLocation();
-                double distance = location.distance(location2);
-
-                if (distance < closestdistance) {
-                    closestdistance = distance;
-                    closestplayer = player2;
-                }
-            }
-            mainplayer.setCompassTarget(closestplayer.getLocation());
         }
     }
 }

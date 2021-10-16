@@ -14,7 +14,6 @@ import static com.revest.biomerace.config.textstring.translatedtext;
 public class BiomeRaceActionBar extends BukkitRunnable {
     private final String randombiome;
 
-
     public BiomeRaceActionBar(String randombiome) {
         this.randombiome = randombiome;
     }
