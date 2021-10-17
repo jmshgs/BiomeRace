@@ -1,8 +1,10 @@
 package com.revest.biomerace.commands;
 
 import com.revest.biomerace.BiomeRace;
+import com.revest.biomerace.events.BiomeRaceEvents;
 import com.revest.biomerace.checks.BiomeRaceActionBar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
+import com.revest.biomerace.checks.BiomeRaceCompass;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,8 +27,13 @@ public class BiomeRaceCommands implements CommandExecutor {
     public static String randombiome = "";
     public int actionbartickdelay = 5;
     public int racechecktickdelay = 100;
-    private BukkitTask ab_task;
-    private BukkitTask rc_task;
+    public int compasstickdelay = 100;
+    private BukkitTask abtask;
+    private BukkitTask rctask;
+    private BukkitTask cptask;
+    private Player mainplayer;
+    private Player closestplayer;
+    private double closestdistance;
 
 
     public BiomeRaceCommands(BiomeRace plugin) {
@@ -66,14 +73,16 @@ public class BiomeRaceCommands implements CommandExecutor {
                 player.sendTitle(translatedtext("messages.racestarttitle",randombiome.replace("_", " ")), translatedtext("messages.racestartsubtitle"), 10, 100, 20);
 
             }
-            rc_task = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, racechecktickdelay);
-            ab_task = new BiomeRaceActionBar(randombiome).runTaskTimer(this.plugin, 0, actionbartickdelay);
+            rctask = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, racechecktickdelay);
+            abtask = new BiomeRaceActionBar(randombiome, closestplayer, closestdistance).runTaskTimer(this.plugin, 0, actionbartickdelay);
+            cptask = new BiomeRaceCompass(mainplayer).runTaskTimer(this.plugin, 0, compasstickdelay);
         }
 
         if (cmd.getName().equalsIgnoreCase("stoprace")) {
-            if (rc_task != null) {
-                rc_task.cancel();
-                ab_task.cancel();
+            if (rctask != null) {
+                rctask.cancel();
+                abtask.cancel();
+                cptask.cancel();
             }
 
             for (Player player : getServer().getOnlinePlayers()) {
@@ -99,6 +108,11 @@ public class BiomeRaceCommands implements CommandExecutor {
                 racechecktickdelay = Integer.parseInt(args[1]);
                 settoconfigwithint("delay.racechecktickdelay", racechecktickdelay);
                 Sender.sendMessage(translatedtext("messages.racecheckupdatedesription", Integer.toString(racechecktickdelay)));
+            }
+            if (args[0].startsWith("compass") && args.length > 1) {
+                compasstickdelay = Integer.parseInt(args[1]);
+                settoconfigwithint("delay.compasstickdelay", compasstickdelay);
+                Sender.sendMessage(translatedtext("messages.compassupdatedesription", Integer.toString(compasstickdelay)));
             }
             if (args[0].startsWith("help")) {
                 Sender.sendMessage(translatedtext("messages.updatedelayhelp"));
