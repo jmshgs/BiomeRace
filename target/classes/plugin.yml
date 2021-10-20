@@ -1,0 +1,36 @@
+name: BiomeRace
+version: 1.2
+author: Revest
+main: com.revest.biomerace.BiomeRace
+api-version: 1.17
+commands:
+  biome:
+    description: Tells player the biome they are currently in.
+    usage: /biome
+    permission:
+      default: true
+  pplonline:
+    description: Displays the players online in the chat to the player.
+    usage: /pplonline
+    permission:
+      default: true
+  startrace:
+    description: Starts the biome race.
+    usage: /startrace
+    permission:
+      default: op
+  racestatus:
+    description: Check what biome you are looking for in the biome race.
+    usage: /racestatus
+    permission:
+      default: true
+  stoprace:
+    description: Stops the current race.
+    usage: /stoprace
+    permission:
+      default: op
+  updatedelay:
+    description: Changes the tick update delay of the player's location.
+    usage: /updatedelay {Amount of ticks}
+    permission:
+      default: op

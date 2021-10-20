@@ -10,7 +10,7 @@ messages:
   tabcompleteinstanceload: "§bCreating BiomeRace Tab Instance"
   configinstanceload: "§bCreating Config Instance"
   translatedtextload: "§bTranslated Text Loaded"
-  updatedelayhelp: "§bUse /updatedelay to change how fast the game will update the location of the players. Input values are measured in ticks."
+  updatedelayhelp: "§bUse §e/updatedelay§b §2ab §c<ticks>§b for changing the action bar tick delay and use §e/updatedelay§b §2rc §c<ticks>§b for changing the Biome Race Biome Update Check tick delay, this means how fast it updates."
   firsttobiome: "§b %s found the biome first!"
   ggmsg: "§bggs"
   currentbiome: "§3Current Biome: %s"
