@@ -11,9 +11,6 @@ import static com.revest.biomerace.config.textstring.translatedtext;
 
 
 public class BiomeRace extends JavaPlugin {
-
-
-
     @Override
     public void onEnable() {
         textstring.enable(this);
@@ -21,6 +18,7 @@ public class BiomeRace extends JavaPlugin {
         BiomeRaceCommands commands = new BiomeRaceCommands(this);
         BiomeRaceTabComplete tabComplete = new BiomeRaceTabComplete(this);
         getServer().getPluginManager().registerEvents(new BiomeRaceEvents(this), this);
+        // Initialize the commands
         getCommand("biome").setExecutor(commands);
         getCommand("pplonline").setExecutor(commands);
         getCommand("startrace").setExecutor(commands);
@@ -28,18 +26,14 @@ public class BiomeRace extends JavaPlugin {
         getCommand("racestatus").setExecutor(commands);
         getCommand("updatedelay").setExecutor(commands);
         getCommand("updatedelay").setTabCompleter(tabComplete);
-        getServer().getConsoleSender().sendMessage(translatedtext("messages.enabled"));
-        this.saveDefaultConfig();
-        commands.actionbartickdelay = Integer.parseInt(translatedtext("delay.actionbartickdelay"));
-        commands.racechecktickdelay = Integer.parseInt(translatedtext("delay.racechecktickdelay"));
-
-
+        getServer().getConsoleSender().sendMessage(translatedtext("messages.enabled")); // Print enabled message
+        this.saveDefaultConfig(); // Makes sure "config.yml" file is on the disk, if not create it.
+        commands.checktickdelay = Integer.parseInt(translatedtext("delay.racechecktickdelay")); // Set "checktickdelay" to the value in "config.yml"
     }
 
     @Override
     public void onDisable() {
-        getServer().getConsoleSender().sendMessage(translatedtext("messages.disabled"));
-        //this.saveConfig();
-
+        getServer().getConsoleSender().sendMessage(translatedtext("messages.disabled")); // Print disabled message
+        this.saveConfig(); // Save config
     }
 }

@@ -1,7 +1,6 @@
 delay:
-  actionbartickdelay: 5
-  racechecktickdelay: 100
-  compasstickdelay: 100
+  checktickdelay: 5
+  compasstickdelay: 20
 
 messages:
   reloadconfig: "§bReloading Config!"
@@ -13,8 +12,7 @@ messages:
   updatedelayhelp: "§bUse /updatedelay to change how fast the game will update the location of the players. Input values are measured in ticks."
   firsttobiome: "§b %s found the biome first!"
   ggmsg: "§bggs"
-  currentbiome: "§3Current Biome: %s"
-  lookforbiome: "§5Looking For: %s"
+  biomeactionbar: "§6Current Biome: %s - Looking for: %s"
   trackingplayer: "§6 Currently tracking: %s - Distance: %s"
   onlineplayers: "§bPlayers Online: %s"
   racestarttitle: "§bFind a %s biome!"
@@ -22,12 +20,10 @@ messages:
   racecanceltitle: "§bThe race has been cancelled."
   racecancelsubtitle: ""
   racestatus: "§bLooking for a %s biome currently."
-  racecheckupdatedesription: "§bThe tick delay for checking the players' location has been set to %s ticks. (A tick is a 20th of a second.)"
-  actionbarupdatedesription: "§bThe tick delay for updating the action bar has been set to %s ticks. (A tick is a 20th of a second.)"
+  checkupdatedesription: "§bThe tick delay for checking the players' location has been set to %s ticks. (A tick is a 20th of a second.)"
   compassupdatedesription: "§bThe tick delay for updating the compass has been set to %s ticks. (A tick is a 20th of a second.)"
-  updatedelayinputless: "§bPlease specify the amount of ticks you'd like to change."
-  updatedelayvalues: "§b Action Bar Value: %s , Race Check Value: %s"
-  updatedelayusage: "§b Please enter a type, you can use, /updatedelay reload to reload the config, this will add whatever manual changes you added to the config into the game."
+  updatedelayusage: "§bPlease specify which component of the plugin you would like to change the update time for, then type the amount of ticks you'd like to change."
+  playerjoin: "§bWelcome :D"
 
 
 

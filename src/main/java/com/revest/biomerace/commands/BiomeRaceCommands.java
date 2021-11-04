@@ -25,15 +25,12 @@ import static org.bukkit.Bukkit.getWorld;
 public class BiomeRaceCommands implements CommandExecutor {
     private final BiomeRace plugin;
     public static String randombiome = "";
-    public int actionbartickdelay = 5;
-    public int racechecktickdelay = 100;
+    public int checktickdelay = 100;
     public int compasstickdelay = 100;
     private BukkitTask abtask;
     private BukkitTask rctask;
     private BukkitTask cptask;
-    private Player mainplayer;
-    private Player closestplayer;
-    private double closestdistance;
+    private BiomeRaceCompass compass;
 
 
     public BiomeRaceCommands(BiomeRace plugin) {
@@ -46,18 +43,19 @@ public class BiomeRaceCommands implements CommandExecutor {
         if (!(sender instanceof Player)) {
             return true;
         }
+        //Create variables
         Player Sender = (Player) sender;
         String[] biomes = {"jungle", "desert", "plains", "basalt_deltas", "savanna", "swamp", "taiga",
                 "mountains", "forest", "warped_forest", "crimson_forest", "nether_wastes"};
         String currentbiome = Sender.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT);
-
+        // /biome command - tells the sender the biome they are currently in
         if (cmd.getName().equalsIgnoreCase("biome")) {
-            Sender.sendMessage("§bYou are currently in a " + currentbiome.replace("_", " ") + "§b biome.");
+            Sender.sendMessage("§bYou are currently in a " + currentbiome.replace("_", " ") + "§b biome."); // Sends the sender a message of what biome they are in
         }
-
+        // /pplonline command - tells the sender which players are online
         if (cmd.getName().equalsIgnoreCase("pplonline")) {
-            List<String> playersonline = new ArrayList<>();
-            for (Player player : getServer().getOnlinePlayers()) {
+            List<String> playersonline = new ArrayList<>(); // Create an array of players online
+            for (Player player : getServer().getOnlinePlayers()) { // Loop through online players
                 String playername = player.getName();
                 playersonline.add(playername);
             }
@@ -70,12 +68,13 @@ public class BiomeRaceCommands implements CommandExecutor {
             int randomidx = new Random().nextInt(biomes.length);
             randombiome = biomes[randomidx];
             for (Player player : getServer().getOnlinePlayers()) {
-                player.sendTitle(translatedtext("messages.racestarttitle",randombiome.replace("_", " ")), translatedtext("messages.racestartsubtitle"), 10, 100, 20);
+                player.sendTitle(translatedtext("messages.racestarttitle", randombiome.replace("_", " ")), translatedtext("messages.racestartsubtitle"), 10, 100, 20);
 
             }
-            rctask = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, racechecktickdelay);
-            abtask = new BiomeRaceActionBar(randombiome, closestplayer, closestdistance).runTaskTimer(this.plugin, 0, actionbartickdelay);
-            cptask = new BiomeRaceCompass(mainplayer).runTaskTimer(this.plugin, 0, compasstickdelay);
+            compass = new BiomeRaceCompass(BiomeRaceEvents.mainplayer);
+            cptask = compass.runTaskTimer(this.plugin, 0, compasstickdelay);
+            rctask = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, checktickdelay);
+            abtask = new BiomeRaceActionBar(randombiome, compass).runTaskTimer(this.plugin, 0, checktickdelay);
         }
 
         if (cmd.getName().equalsIgnoreCase("stoprace")) {
@@ -99,15 +98,10 @@ public class BiomeRaceCommands implements CommandExecutor {
             if (args.length < 1) {
                 Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
             }
-            if (args[0].startsWith("actionbar") && args.length > 1) {
-                actionbartickdelay = Integer.parseInt(args[1]);
-                settoconfigwithint("delay.actionbartickdelay", actionbartickdelay);
-                Sender.sendMessage(translatedtext("messages.actionbarupdatedesription", Integer.toString(actionbartickdelay)));
-            }
-            if (args[0].startsWith("racecheck") && args.length > 1) {
-                racechecktickdelay = Integer.parseInt(args[1]);
-                settoconfigwithint("delay.racechecktickdelay", racechecktickdelay);
-                Sender.sendMessage(translatedtext("messages.racecheckupdatedesription", Integer.toString(racechecktickdelay)));
+            if (args[0].startsWith("check") && args.length > 1) {
+                checktickdelay = Integer.parseInt(args[1]);
+                settoconfigwithint("delay.checktickdelay", checktickdelay);
+                Sender.sendMessage(translatedtext("messages.checkupdatedesription", Integer.toString(checktickdelay)));
             }
             if (args[0].startsWith("compass") && args.length > 1) {
                 compasstickdelay = Integer.parseInt(args[1]);
@@ -120,19 +114,15 @@ public class BiomeRaceCommands implements CommandExecutor {
             if (args[0].startsWith("reload")) {
                 plugin.reloadConfig();
                 Sender.sendMessage(translatedtext("messages.reloadconfig"));
+            } else {
+                Sender.sendMessage(translatedtext("messages.updatedelayusage"));
             }
-            if (args[0].startsWith("values")) {
-                Sender.sendMessage(translatedtext("messages.updatedelayvalues"));
-            }
-                else {
-                Sender.sendMessage(translatedtext("messages.updatedelayinputless"));
-                }
 
-            }
-        return true;
-
-            }
         }
+        return true;
+        }
+    }
+
 
 
 

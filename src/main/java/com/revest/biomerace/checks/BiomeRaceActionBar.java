@@ -15,34 +15,27 @@ import static java.lang.Double.MAX_VALUE;
 
 public class BiomeRaceActionBar extends BukkitRunnable {
     private final String randombiome;
-    private Player closestplayer;
-    private double closestdistance;
+    private BiomeRaceCompass compass;
 
-    public BiomeRaceActionBar(String randombiome, Player closestplayer, Double closestdistance) {
+    public BiomeRaceActionBar(String randombiome, BiomeRaceCompass compass) {
         this.randombiome = randombiome;
-        this.closestplayer = closestplayer;
-        this.closestdistance = closestdistance;
+        this.compass = compass;
     }
 
     @Override
     public void run() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            String currentbiome = player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT);
-            if (player.getInventory().getItemInMainHand().getType() == Material.COMPASS) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(translatedtext("messages.trackingplayer", closestplayer.toString(), String.valueOf(closestdistance))));
+        for (Player player : Bukkit.getOnlinePlayers()) { // Loop through players online
+            String currentbiome = player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT); // Set current biome to players' location
+            if (player.getInventory().getItemInMainHand().getType() == Material.COMPASS) { // Check if player is holding a compass
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(translatedtext("messages.trackingplayer", compass.closestplayer.getName(), String.valueOf(compass.closestdistance)))); // Print closest player and the distance to that player
             } else {
-                if (!player.isSneaking()) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(translatedtext("messages.currentbiome", currentbiome.replace("_", " "))));
-                } else {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent((translatedtext("messages.lookforbiome", randombiome.replace("_", " ")))));
-                }
-                if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) {
-                    // Stop loop if player found the biome.
-                    this.cancel();
-                }
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(translatedtext("messages.biomeactionbar", currentbiome.replace("_", " "), randombiome.replace("_", " ")))); // Print biome player is currently in and "randombiome"
             }
-
+            if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) { // Check if player has found biome.
+                // Stop loop if player found the biome.
+                this.cancel();
+            }
         }
-
     }
 }
+

@@ -1,4 +1,5 @@
 package com.revest.biomerace.checks;
+
 import com.revest.biomerace.BiomeRace;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -21,15 +22,13 @@ public class BiomeRaceCheck extends BukkitRunnable {
 
     @Override
     public void run() {
-        // LESS LAG Bukkit.getConsoleSender().sendMessage("Checking location of players!");
-        for (Player player : getServer().getOnlinePlayers()) {
-            // Check if this player is in biome
-            if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) {
+        for (Player player : getServer().getOnlinePlayers()) { // Loop through players online
+            if (randombiome.equals(player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT))) { // Check if player is in biome
                 // Player is in biome - message all players that the game is over
                 for (Player p : getServer().getOnlinePlayers()) {
                     p.sendTitle(translatedtext("messages.firsttobiome", player.getName()), translatedtext("messages.ggmsg", null), 10, 100, 20);
                 }
-                // Stop loop
+                // Stop the loop
                 this.cancel();
             }
         }
