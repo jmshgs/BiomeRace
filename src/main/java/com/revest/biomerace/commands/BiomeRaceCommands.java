@@ -120,8 +120,8 @@ public class BiomeRaceCommands implements CommandExecutor {
 
         }
         return true;
-        }
     }
+}
 
 
 
