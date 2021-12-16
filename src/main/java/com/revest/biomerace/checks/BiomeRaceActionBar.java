@@ -23,8 +23,10 @@ public class BiomeRaceActionBar extends BukkitRunnable {
         for (Player player : Bukkit.getOnlinePlayers()) { // Loop through players online
             String currentbiome = player.getLocation().getBlock().getBiome().toString().toLowerCase(Locale.ROOT); // Set current biome to players' location
             if (player.getInventory().getItemInMainHand().getType() == Material.COMPASS) { // Check if player is holding a compass
+
                 PlayerTracker Tracker = new PlayerTracker(player);
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(translatedtext("messages.trackingplayer", Tracker.Closestplayer().getName(), String.valueOf(Tracker.ClosestPlayer_GetDistance())))); // Print closest player and the distance to that player
+                Tracker.CompassTrackAuto();
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(translatedtext("messages.trackingplayer", Tracker.ClosestPlayer().getName(), String.valueOf(Tracker.ClosestPlayer_GetDistance())))); // Print closest player and the distance to that player
             } else {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(translatedtext("messages.biomeactionbar", currentbiome.replace("_", " "), randombiome.replace("_", " ")))); // Print biome player is currently in and "randombiome"
             }

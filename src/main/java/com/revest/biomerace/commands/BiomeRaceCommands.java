@@ -4,7 +4,7 @@ import com.revest.biomerace.BiomeRace;
 import com.revest.biomerace.events.BiomeRaceEvents;
 import com.revest.biomerace.checks.BiomeRaceActionBar;
 import com.revest.biomerace.checks.BiomeRaceCheck;
-import com.revest.biomerace.checks.BiomeRaceCompass;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -30,7 +30,6 @@ public class BiomeRaceCommands implements CommandExecutor {
     private BukkitTask abtask;
     private BukkitTask rctask;
     private BukkitTask cptask;
-    private BiomeRaceCompass compass;
 
 
     public BiomeRaceCommands(BiomeRace plugin) {

@@ -27,15 +27,23 @@ public class PlayerTracker {
                 closestdistance = distance;
                 closestplayer = theplayer;
             }
-            player.setCompassTarget(closestplayer.getLocation()); // Set the compass to point to "closestplayer"
         }
     }
 
 
-    public Player Closestplayer() {
+    public Player ClosestPlayer() {
         return closestplayer;
     }
     public double ClosestPlayer_GetDistance() {
         return closestdistance;
+    }
+    public void CompassTrackLocation(Location TrackedPlayerLocation) {
+        thisplayer.setCompassTarget(TrackedPlayerLocation); // Set the compass to point to "closestplayer"
+    }
+    public void CompassTrackPlayer(Player TrackedPlayer) {
+        thisplayer.setCompassTarget(TrackedPlayer.getLocation()); // Set the compass to point to "closestplayer"
+    }
+    public void CompassTrackAuto() {
+        thisplayer.setCompassTarget(ClosestPlayer().getLocation()); // Set the compass to point to "closestplayer"
     }
 }
