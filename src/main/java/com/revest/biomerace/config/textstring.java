@@ -32,6 +32,10 @@ public class textstring {
     public static void settoconfigwithint(String path, Integer value) {
         plugin.getConfig().set(path, value);
     }
+    public static int getintConfig(String path) {
+        Object pathed = plugin.getConfig().get(path);
+        return Integer.parseInt(String.valueOf(pathed));
+    }
 
     public static String translatedtext(String s, String... replace) {
         //seems to work just as good as Vanilla Client version and Works good with config.

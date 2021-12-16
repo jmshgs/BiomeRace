@@ -7,6 +7,7 @@ import com.revest.biomerace.events.BiomeRaceEvents;
 import com.revest.biomerace.commands.BiomeRaceCommands;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import static com.revest.biomerace.config.textstring.getintConfig;
 import static com.revest.biomerace.config.textstring.translatedtext;
 
 
@@ -28,7 +29,7 @@ public class BiomeRace extends JavaPlugin {
         getCommand("updatedelay").setTabCompleter(tabComplete);
         getServer().getConsoleSender().sendMessage(translatedtext("messages.enabled")); // Print enabled message
         this.saveDefaultConfig(); // Makes sure "config.yml" file is on the disk, if not create it.
-        commands.checktickdelay = Integer.parseInt(translatedtext("delay.racechecktickdelay")); // Set "checktickdelay" to the value in "config.yml"
+        commands.checktickdelay = getintConfig("delay.racechecktickdelay"); // Set "checktickdelay" to the value in "config.yml"
     }
 
     @Override
