@@ -71,17 +71,15 @@ public class BiomeRaceCommands implements CommandExecutor {
                 player.sendTitle(translatedtext("messages.racestarttitle", randombiome.replace("_", " ")), translatedtext("messages.racestartsubtitle"), 10, 100, 20);
 
             }
-            compass = new BiomeRaceCompass(BiomeRaceEvents.mainplayer);
-            cptask = compass.runTaskTimer(this.plugin, 0, compasstickdelay);
+
             rctask = new BiomeRaceCheck(Sender, randombiome).runTaskTimer(this.plugin, 0, checktickdelay);
-            abtask = new BiomeRaceActionBar(randombiome, compass).runTaskTimer(this.plugin, 0, checktickdelay);
+            abtask = new BiomeRaceActionBar(randombiome).runTaskTimer(this.plugin, 0, checktickdelay);
         }
 
         if (cmd.getName().equalsIgnoreCase("stoprace")) {
             if (rctask != null) {
                 rctask.cancel();
                 abtask.cancel();
-                cptask.cancel();
             }
 
             for (Player player : getServer().getOnlinePlayers()) {
