@@ -32,9 +32,8 @@ public class textstring {
     public static void settoconfigwithint(String path, Integer value) {
         plugin.getConfig().set(path, value);
     }
-    public static int getintConfig(String path) {
-        Object pathed = plugin.getConfig().get(path);
-        return Integer.parseInt(String.valueOf(pathed));
+    public static Integer getIntConfig(String path) {
+        return plugin.getConfig().getInt(path);
     }
 
     public static String translatedtext(String s, String... replace) {
