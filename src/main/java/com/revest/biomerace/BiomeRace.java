@@ -34,7 +34,7 @@ public class BiomeRace extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        getServer().getConsoleSender().sendMessage(translatedtext("messages.disabled")); // Print disabled message
         this.saveConfig(); // Save config
+        getServer().getConsoleSender().sendMessage(translatedtext("messages.disabled")); // Print disabled message
     }
 }
