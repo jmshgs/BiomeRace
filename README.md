@@ -1,6 +1,6 @@
 # BiomeRace
 
-This is a Minecraft plugin that lets players on a server race each other to a randomly chosen biome.
+A Minecraft plugin that lets players on a server race each other to a randomly chosen biome.
 
 # Source Code Info
 
